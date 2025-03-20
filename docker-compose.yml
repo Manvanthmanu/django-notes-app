@@ -16,11 +16,11 @@ services:
   django_app:
     build:
       context: .
-    image: django_app
-    container_name: "django_cont"
+    image: django_app2
+    container_name: "django_cont2"
     ports:
-      - "8000:8000"
-    command: sh -c "python manage.py migrate --noinput && gunicorn notesapp.wsgi --bind 0.0.0.0:8000"
+      - "6000:6000"
+    command: sh -c "python manage.py migrate --noinput && gunicorn notesapp.wsgi --bind 0.0.0.0:6000"
     env_file:
       - ".env"
     depends_on:
