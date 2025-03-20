@@ -1,0 +1,46 @@
+@Library("shared") _
+pipeline{
+    agent {label "jenkins-agent"}
+    
+    stages{
+        stage("welcome"){
+            steps{
+                script{
+                    hello()
+                }
+            }
+        }
+        stage("clone"){
+            steps{
+                script{
+                    clone("https://github.com/Manvanthmanu/django-notes-app.git","main")
+                }
+            }
+        }
+        stage("build"){
+            steps{
+                echo "This is the build phase"
+                sh "docker compose up -d"
+            }
+        }
+        stage("Test"){
+            steps{
+                echo "This is the Test phase"
+            }
+        }
+        stage("pushImage"){
+                steps{
+                    script{
+                        push("docker-manu", "notesapp", "latest")
+                    }
+                
+                }
+            
+        }
+        stage("Deploy"){
+            steps{
+                echo "This is the Deploy stage"
+            }
+        }
+    }
+}
