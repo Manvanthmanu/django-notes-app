@@ -37,12 +37,14 @@ services:
 
   db:
     image: mysql
-    container_name: "db_cont"
+    container_name: "db_cont2"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=test_db
     volumes:
       - ./data/mysql/db:/var/lib/mysql
+    ports:
+    - "3600:3600"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
